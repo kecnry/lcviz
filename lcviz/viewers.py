@@ -247,6 +247,15 @@ class TimeScatterView(JdavizViewerMixin, BqplotScatterView):
 
 @viewer_registry("lcviz-phase-viewer", label="phase-vs-time")
 class PhaseScatterView(TimeScatterView):
+    tools_nested = [
+                    ['jdaviz:homezoom', 'jdaviz:prevzoom'],
+                    ['jdaviz:boxzoom', 'jdaviz:xrangezoom'],
+                    ['jdaviz:panzoom', 'jdaviz:panzoom_x', 'jdaviz:panzoom_y'],
+                    ['bqplot:xrange', 'bqplot:yrange', 'bqplot:rectangle'],
+                    ['lcviz:ephem'],
+                    ['jdaviz:sidebar_plot', 'jdaviz:sidebar_export']
+                ]
+
     @property
     def ephemeris_component(self):
         return self.reference.split('[')[0].split(':')[-1]
