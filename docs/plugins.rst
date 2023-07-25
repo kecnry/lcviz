@@ -21,14 +21,34 @@ Plot Options
 This plugin gives access to per-viewer and per-layer plotting options.
 
 
+.. _flatten
+
+Flatten
+=======
+
+This plugin allows for removing long-term trends from the light curve.
+
+.. _frequency_analysis
+
+Frequency Analysis
+==================
+
+This plugin exposes Lomb-Scargle and Box Least Squares periodograms of a light curve.
+
 .. _ephemeris
 
 Ephemeris
-============
+==========
 
 The ephemeris plugin allows for setting, finding, and refining the ephemeris or ephemerides used
 for phase-folding.
 
+.. _binning:
+
+Binning
+=======
+
+This plugin supports binning a light curve in time or phase-space.
 
 .. _export-plot:
 
