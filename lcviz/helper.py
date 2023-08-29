@@ -192,6 +192,9 @@ class LCviz(ConfigHelper):
         """
         return super()._get_data(data_label=data_label, mask_subset=subset, cls=cls)
 
+    def _phase_comp_lbl(self, component):
+        return f'phase:{component}'
+
     def _set_data_component(self, data, component_label, values):
         if component_label not in self._component_ids:
             self._component_ids[component_label] = ComponentID(component_label)

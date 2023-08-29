@@ -186,7 +186,8 @@ class Binning(PluginTemplateMixin, DatasetSelectMixin, EphemerisSelectMixin, Add
 
             # prevent phase axis from becoming a time axis:
             pv = self.app.get_viewer(self.ephemeris_plugin._obj.phase_viewer_id)
-            pv.state.x_att = self.app._jdaviz_helper._component_ids[self.phase_comp_lbl]
+            phase_comp_lbl = self.app._jdaviz_helper._phase_comp_lbl(self.ephemeris_selected)
+            pv.state.x_att = self.app._jdaviz_helper._component_ids[phase_comp_lbl]
 
         if add_data:
             # add data to the collection/viewer

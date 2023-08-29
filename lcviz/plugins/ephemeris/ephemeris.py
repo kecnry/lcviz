@@ -122,7 +122,11 @@ class Ephemeris(PluginTemplateMixin, DatasetSelectMixin):
         return PluginUserApi(self, expose=expose)
 
     def _phase_comp_lbl(self, component):
-        return f'phase:{component}'
+        if self.app._jdaviz_helper is None:
+            # duplicate logic from helper in case this is ever called before the helper
+            # is fully intialized
+            return f'phase:{component}'
+        return self.app._jdaviz_helper._phase_comp_lbl(component)
 
     @property
     def phase_comp_lbl(self):
