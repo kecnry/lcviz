@@ -184,6 +184,10 @@ class Binning(PluginTemplateMixin, DatasetSelectMixin, EphemerisSelectMixin, Add
                             scale=input_lc.time_original.scale)
             lc.add_column(time_col, name="time_original", index=len(lc._required_columns))
 
+            # prevent phase axis from becoming a time axis:
+            pv = self.app.get_viewer(self.ephemeris_plugin._obj.phase_viewer_id)
+            pv.state.x_att = self.app._jdaviz_helper._component_ids[self.phase_comp_lbl]
+
         if add_data:
             # add data to the collection/viewer
             # NOTE: lc will have _LCVIZ_EPHEMERIS set if phase-folded

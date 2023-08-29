@@ -4,6 +4,7 @@ import os
 
 from lightkurve import LightCurve
 
+from glue.core.component_id import ComponentID
 from glue.core.link_helpers import LinkSame
 from jdaviz.core.helpers import ConfigHelper
 from lcviz.events import ViewerRenamedMessage
@@ -123,6 +124,8 @@ class LCviz(ConfigHelper):
                                                     'plot': 'lcviz-time-viewer',
                                                     'reference': 'flux-vs-time'}]}]}]}
 
+    _component_ids = {}
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._default_time_viewer_reference_name = _default_time_viewer_reference_name
@@ -188,3 +191,20 @@ class LCviz(ConfigHelper):
             Data is returned as type cls with subsets applied.
         """
         return super()._get_data(data_label=data_label, mask_subset=subset, cls=cls)
+
+    def _set_data_component(self, data, component_label, values):
+        if component_label not in self._component_ids:
+            self._component_ids[component_label] = ComponentID(component_label)
+
+        if self._component_ids[component_label] in data.components:
+            data.update_components({self._component_ids[component_label]: values})
+        else:
+            data.add_component(values, self._component_ids[component_label])
+
+        # this loop catches phase components generated automatically by
+        # when add_results is triggered in other plugins:
+        for comp in data.components:
+            if component_label == comp.label:
+                data.remove_component(component_label)
+
+        data.add_component(values, self._component_ids[component_label])
