@@ -204,10 +204,4 @@ class LCviz(ConfigHelper):
         else:
             data.add_component(values, self._component_ids[component_label])
 
-        # this loop catches phase components generated automatically by
-        # when add_results is triggered in other plugins:
-        for comp in data.components:
-            if component_label == comp.label:
-                data.remove_component(component_label)
-
         data.add_component(values, self._component_ids[component_label])
