@@ -5,6 +5,8 @@ from lcviz.viewers import PhaseScatterView
 
 __all__ = ['LivePreviewTrend', 'LivePreviewFlattened', 'LivePreviewBinning']
 
+lcviz_preview_color = "#46C089"
+
 
 class WithoutPhaseSupport:
     def update_ty(self, times, y):
@@ -46,4 +48,6 @@ class LivePreviewFlattened(PluginScatter, WithPhaseSupport):
 class LivePreviewBinning(PluginScatter, WithPhaseSupport):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('default_size', 16)
+        kwargs.setdefault('colors', [lcviz_preview_color])
+        kwargs.setdefault('marker', 'square')
         super().__init__(*args, **kwargs)
