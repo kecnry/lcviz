@@ -3,6 +3,8 @@ from glue.config import data_translator
 from jdaviz.core.registries import data_parser_registry
 import lightkurve
 
+from lcviz.dev import is_enabled
+
 __all__ = ["light_curve_parser"]
 
 
@@ -27,6 +29,9 @@ def light_curve_parser(app, file_obj, data_label=None, show_in_viewer=True, **kw
 
     elif isinstance(file_obj, cls_with_translator):
         light_curve = file_obj
+
+    if not is_enabled('tpf') and isinstance(light_curve, lightkurve.targetpixelfile.TargetPixelFile):
+        raise NotImplementedError("TPF support is not yet supported")
 
     # make a data label:
     if data_label is not None:

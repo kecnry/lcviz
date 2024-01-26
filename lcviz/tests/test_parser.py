@@ -7,6 +7,7 @@ from lightkurve import LightCurve, KeplerTargetPixelFile, search_targetpixelfile
 from lightkurve.io import kepler
 import astropy.units as u
 
+from lcviz.dev import temporarily_enabled
 from lcviz.utils import TimeCoordinates
 
 
@@ -50,16 +51,21 @@ def test_kepler_via_mast_preparsed(helper):
     assert flux.unit.is_equivalent(u.electron / u.s)
 
 
-@pytest.mark.remote_data
+#@pytest.mark.remote_data
 def test_kepler_tpf_via_lightkurve(helper):
     tpf = search_targetpixelfile("KIC 001429092",
                                  mission="Kepler",
                                  cadence="long",
                                  quarter=10).download()
-    helper.load_data(tpf)
-    assert helper.get_data().shape == (4447, 4, 6)  # (time, x, y)
-    assert helper.app.data_collection[0].get_object(cls=KeplerTargetPixelFile).shape == (4447, 4, 6)
 
+    with pytest.raises(NotImplementedError):
+        helper.load_data(tpf)
+
+    with temporarily_enabled('tpf'):
+        helper.load_data(tpf)
+
+        assert helper.get_data().shape == (4447, 4, 6)  # (time, x, y)
+        assert helper.app.data_collection[0].get_object(cls=KeplerTargetPixelFile).shape == (4447, 4, 6)
 
 def test_synthetic_lc(helper):
     time = Time(np.linspace(2460050, 2460060), format='jd')
