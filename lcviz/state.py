@@ -24,9 +24,10 @@ class ScatterViewerState(ScatterViewerState):
         if not np.all(np.isfinite([ax_min, ax_max])):  # pragma: no cover
             return
 
-        with delay_callback(self, f'{ax}_min', f'{ax}_max'):
-            setattr(self, f'{ax}_min', ax_min)
-            setattr(self, f'{ax}_max', ax_max)
+        lim_helper = getattr(self, f'{ax}_lim_helper')
+        lim_helper.lower = ax_min
+        lim_helper.upper = ax_max
+        lim_helper.update_values()
 
     def _reset_x_limits(self, *event):
         self._reset_att_limits('x')
