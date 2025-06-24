@@ -516,9 +516,11 @@ def phase_comp_lbl(component):
 def data_not_folded(data):
     return data.meta.get('_LCVIZ_EPHEMERIS', None) is None
 
+
 def is_lc(data):
     return (len(data.shape) == 1
             and isinstance(data.coords, TimeCoordinates))
+
 
 def is_tpf(data):
     return len(data.shape) == 3

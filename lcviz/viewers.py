@@ -10,7 +10,6 @@ from glue_jupyter.bqplot.scatter import BqplotScatterView
 from astropy import units as u
 from astropy.time import Time
 
-from jdaviz.core.events import NewViewerMessage
 from jdaviz.core.registries import viewer_registry
 from jdaviz.configs.cubeviz.plugins.viewers import (CubevizImageView,
                                                     WithSliceIndicator, WithSliceSelection)

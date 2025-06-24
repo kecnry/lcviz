@@ -1,5 +1,4 @@
 from traitlets import observe
-from traitlets.config import Configurable
 
 from jdaviz.core.viewer_creators import BaseViewerCreator
 from jdaviz.core.registries import viewer_creator_registry
@@ -7,7 +6,7 @@ from jdaviz.core.user_api import ViewerCreatorUserApi
 
 from lcviz.components import EphemerisSelectMixin
 from lcviz.viewers import TimeScatterView, PhaseScatterView
-from lcviz.utils import is_lc, is_tpf
+from lcviz.utils import is_lc
 
 __all__ = ['FluxVsTimeViewerCreator']
 

@@ -6,7 +6,6 @@ import os
 from lightkurve import LightCurve
 
 from glue.config import settings as glue_settings
-from glue.core.component_id import ComponentID
 from glue.core.link_helpers import LinkSame
 from glue.core.units import unit_converter
 from jdaviz.core.helpers import ConfigHelper
@@ -227,5 +226,3 @@ class LCviz(ConfigHelper):
         from ipywidgets.widgets import widget_serialization
         return {item['name']: widget_serialization['from_json'](item['widget'], None)
                 for item in self.app.state.tool_items}
-
-

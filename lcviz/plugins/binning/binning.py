@@ -267,7 +267,7 @@ class Binning(PluginTemplateMixin, FluxColumnSelectMixin, DatasetSelectMixin,
             if self.ephemeris_selected != 'No ephemeris':
                 # prevent phase axis from becoming a time axis:
                 ephemeris_plugin = self.app._jdaviz_helper.plugins['Ephemeris']
-                phase_comp = self.app._jdaviz_helper._component_ids[phase_comp_lbl(self.ephemeris_selected)]
+                phase_comp = self.app._jdaviz_helper._component_ids[phase_comp_lbl(self.ephemeris_selected)]  # noqa
                 for pv in ephemeris_plugin._obj._get_phase_viewers(self.ephemeris_selected):
                     pv.state.x_att = phase_comp
                 # by resetting x_att, the preview marks may have dissappeared

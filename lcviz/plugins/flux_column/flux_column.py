@@ -6,7 +6,7 @@ from jdaviz.core.template_mixin import (PluginTemplateMixin,
 from jdaviz.core.user_api import PluginUserApi
 
 from lcviz.components import FluxColumnSelectMixin
-from lcviz.utils import is_lc, is_not_tpf
+from lcviz.utils import is_lc
 
 __all__ = ['FluxColumn']
 

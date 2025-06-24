@@ -38,6 +38,7 @@ def hdu_is_valid(hdu):
             'LC_INIT_ERR' in hdu.columns.names and
             'TUNIT1' in hdu.header)
 
+
 def hdulist_to_lightcurve(pri_header, hdu):
     data = Table(hdu.data)
     # don't load some columns with names that may
@@ -60,6 +61,7 @@ def hdulist_to_lightcurve(pri_header, hdu):
     lc.meta['EXTNAME'] = hdu.header['EXTNAME']
 
     return lc
+
 
 def has_ephem(lc):
     return ('TPERIOD' in lc.meta and
