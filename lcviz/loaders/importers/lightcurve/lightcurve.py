@@ -146,16 +146,6 @@ class LightCurveImporter(BaseImporterToDataCollection):
             else:
                 self.data_label_default = f"{self.input.meta.get('OBJECT', 'Light curve')} [Q{self.input.meta.get('QUARTER')}]"  # noqa
 
-    def reset_and_check_existing_data_in_dc(self, change={}):
-        # jdaviz 5.0.2's create_data_hash cannot handle a list of LightCurves
-        # (returned by self.output in multiselect HDUList mode), so pre-set
-        # empty hashes to skip duplicate-data detection rather than crash.
-        if not hasattr(self, 'data_hashes'):
-            self.data_hashes = []
-        if not hasattr(self, 'hash_map_to_label'):
-            self.hash_map_to_label = {}
-        super().reset_and_check_existing_data_in_dc(change=change)
-
     @property
     def user_api(self):
         expose = ['create_ephemeris']
