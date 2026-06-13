@@ -163,17 +163,16 @@ class LightCurveImporter(BaseImporterToDataCollection):
             expose += ['extension']
         return ImporterUserApi(self, expose)
 
-    @property
-    def is_valid(self):
+    def _check_is_valid(self):
         if self._app.config not in ('lcviz', 'deconfigged'):
-            return False
+            return f'Light Curve importer is not supported in {self._app.config}.'
         if isinstance(self.input, LightCurve):
-            return True
+            return ''
         if isinstance(self.input, fits.HDUList):
             for hdu in self.input:
                 if hdu_is_valid(hdu):
-                    return True
-        return False
+                    return ''
+        return 'Input must be a LightCurve or a HDUList with a valid light curve extension.'
 
     @observe('extension_selected')
     def _extension_selected_changed(self, event={}):
